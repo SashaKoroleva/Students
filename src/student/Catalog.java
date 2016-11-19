@@ -1,6 +1,7 @@
 package student;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -35,8 +36,23 @@ public class Catalog {
         return studentsOfBSU;
     }
 
-    public void sortOfList() {
-        Collections.sort(studentsOfBSU, new StudentComparator());
+    public void sortOfList(){
+    Collections.sort(studentsOfBSU, new Comparator<Student>() {
+        @Override
+        public int compare(Student o1, Student o2) {
+            int result = o1.getNumberOfGroup() - o2.getNumberOfGroup();
+            if (result != 0) return (int) (result / Math.abs(result));
+
+            result = o1.getSurname().compareTo(o2.getSurname());
+            if (result != 0) return (int) (result / Math.abs(result));
+
+            result = o1.getName().compareTo(o2.getName());
+            return (result != 0) ? (int) (result / Math.abs(result)) : 0;
+        }
+    });
     }
 }
+
+
+
 
